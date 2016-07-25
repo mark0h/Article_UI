@@ -1,9 +1,7 @@
-<h1>Create an Article</h1>
-
-<!-- @article is defined in controller -->
+<h1>Edit existing article</h1>
 
 <% if @article.errors.any? %>
-<h2>Creation had the following errors</h2>
+<h2>Update had the following errors</h2>
 <ul>
   <% @article.errors.full_messages.each do |msg| %>
   <li><%= msg %></li>
