@@ -1,14 +1,4 @@
-<!-- @article is defined in controller -->
-<% if @article.errors.any? %>
-  <h2>Creation had the following errors</h2>
-  <ul>
-    <% @article.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-
-<% end %>
-
+<%= render 'shared/errors', obj: @article %>
 
 <div class="row">
   <div class='col-xs-12'>
