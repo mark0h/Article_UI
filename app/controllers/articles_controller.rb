@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
 	before_action :set_article, only: [:edit, :update, :show, :destroy]
+	before_action :require_user, except: [:index, :show]
+	before_action :require_same_user, only: [:edit, :update, :destroy]
 	
 	def index
 		# @articles = Article.all
@@ -51,5 +53,12 @@ class ArticlesController < ApplicationController
 
 	  def article_params
 	  	params.require(:article).permit(:title, :description)  #Allows these values to go through to the table. Prevents editing of protected fields(like id)
+	  end
+
+	  def require_same_user
+	  	if current_user != @article.user
+	  		flash[:danger] = "HEY! Stop trying to edit/delete other user's articles!!"
+	  		redirect_to root_path
+	  	end
 	  end
 end
