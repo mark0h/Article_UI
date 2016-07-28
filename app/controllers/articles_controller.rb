@@ -52,7 +52,7 @@ class ArticlesController < ApplicationController
 	  end
 
 	  def article_params
-	  	params.require(:article).permit(:title, :description)  #Allows these values to go through to the table. Prevents editing of protected fields(like id)
+	  	params.require(:article).permit(:title, :description, category_ids: [])  #Allows these values to go through to the table. Prevents editing of protected fields(like id)
 	  end
 
 	  def require_same_user
