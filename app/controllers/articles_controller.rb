@@ -2,7 +2,8 @@ class ArticlesController < ApplicationController
 	before_action :set_article, only: [:edit, :update, :show, :destroy]
 	
 	def index
-		@articles = Article.all
+		# @articles = Article.all
+		@articles = Article.paginate(page: params[:page], per_page: 5) #can leave out per_page, and will set to default
 	end
 
 	def new
@@ -13,10 +14,10 @@ class ArticlesController < ApplicationController
 	end
 
 	def create
-		debugger
+		# debugger
 		# render plain: params[:article].inspect #This will display what was sent when created
 		@article = Article.new(article_params)
-		# @article.user = User.first
+		@article.user = User.first
 		if @article.save
 			flash[:success] = "Article was successfully created"
 			redirect_to article_path(@article)
